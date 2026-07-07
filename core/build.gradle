@@ -1,0 +1,90 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven {
+            url = "https://jcenter.bintray.com/"
+        }
+        maven {
+            name = "forge"
+            url = "https://files.minecraftforge.net/maven"
+        }
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+    }
+
+    dependencies {
+        classpath('com.anatawa12.forge:ForgeGradle:1.2-1.1.+') {
+            changing = true
+        }
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
+apply plugin: 'forge'
+
+version = "0.0.0"
+group = "net.manametal.oapi.core"
+archivesBaseName = "M3OpenAPI-CORE"
+
+minecraft {
+    version = "1.7.10-10.13.4.1614-1.7.10"
+    runDir = "minecraft"
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+
+    maven {
+        url = "https://jcenter.bintray.com/"
+    }
+
+    maven {
+        name = "forge"
+        url = "https://files.minecraftforge.net/maven"
+    }
+
+    maven {
+        name = "sonatype"
+        url = "https://oss.sonatype.org/content/repositories/snapshots/"
+    }
+
+    maven {
+        name "kTT MavenReleases"
+        url "https://maven.kessokuteatime.work/releases"
+    }
+
+    maven {
+        name "kTT MavenSnapshots"
+        url "https://maven.kessokuteatime.work/snapshots"
+    }
+
+    maven {
+        name "Curse Maven"
+        url "https://cursemaven.com"
+    }
+
+    maven {
+        name "Modrinth Maven"
+        url "https://api.modrinth.com/maven"
+    }
+}
+
+dependencies {
+    implementation project(":api")
+    implementation "curse.maven:manametal-531708:8057127"
+    implementation "curse.maven:muya1-7-10-530214:4364097"
+}
+
+sourceCompatibility = targetCompatibility = "1.8"
+
+tasks.withType(Jar).configureEach {
+    compileJava.options.encoding = 'UTF-8'
+    compileJava.options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation" << "-Xlint:all"
+}

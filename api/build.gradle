@@ -1,0 +1,113 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven {
+            url = "https://jcenter.bintray.com/"
+        }
+        maven {
+            name = "forge"
+            url = "https://files.minecraftforge.net/maven"
+        }
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+    }
+
+    dependencies {
+        classpath('com.anatawa12.forge:ForgeGradle:1.2-1.1.+') {
+            changing = true
+        }
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
+apply plugin: 'forge'
+
+version = "0.0.0"
+group = "net.manametal.oapi.api"
+archivesBaseName = "M3OpenAPI-API"
+
+minecraft {
+    version = "1.7.10-10.13.4.1614-1.7.10"
+    runDir = "minecraft"
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+
+    maven {
+        url = "https://jcenter.bintray.com/"
+    }
+
+    maven {
+        name = "forge"
+        url = "https://files.minecraftforge.net/maven"
+    }
+
+    maven {
+        name = "sonatype"
+        url = "https://oss.sonatype.org/content/repositories/snapshots/"
+    }
+
+    maven {
+        name "kTT MavenReleases"
+        url "https://maven.kessokuteatime.work/releases"
+    }
+
+    maven {
+        name "kTT MavenSnapshots"
+        url "https://maven.kessokuteatime.work/snapshots"
+    }
+
+    maven {
+        name "Curse Maven"
+        url "https://cursemaven.com"
+    }
+
+    maven {
+        name "Modrinth Maven"
+        url "https://api.modrinth.com/maven"
+    }
+}
+
+dependencies {
+    implementation libs.ppc
+    implementation libs.pineappletag
+}
+
+java {
+}
+
+jar {
+    from file("./LICENSE")
+}
+
+/*
+processResources {
+    inputs.property "modversion", project.version
+    inputs.property "mcversion", project.minecraft.version
+    inputs.property "moddescription", project.modDescription
+    inputs.property "modname", project.modName
+    inputs.property "modid", project.modId
+
+    filesMatching("mcmod.info") {
+        expand  'modversion': project.version,
+                'mcversion': project.minecraft.version,
+                'moddescription': project.modDescription,
+                'modname': project.modName,
+                'modid': project.modId
+    }
+}*/
+
+sourceCompatibility = targetCompatibility = "1.8"
+
+tasks.withType(Jar).configureEach {
+    compileJava.options.encoding = 'UTF-8'
+    compileJava.options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation" << "-Xlint:all"
+}

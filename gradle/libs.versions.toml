@@ -1,0 +1,7 @@
+[versions]
+ppc-version = "1.9.1"
+pineappletag-version = "1.5.1"
+
+[libraries]
+ppc = { module = "club.someoneice.pineapplepsychic:pineapple-psychic", version.ref = "ppc-version" }
+pineappletag = { module = "club.someoneice.togocup.pineapple_tag:pineapple-tag", version.ref = "pineappletag-version" }
