@@ -28,7 +28,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'forge'
 
-version = "0.0.0"
+version = "${project.version}"
 group = "net.manametal.oapi.api"
 archivesBaseName = "M3OpenAPI-API"
 
